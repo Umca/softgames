@@ -11,15 +11,15 @@ const app = new Application<HTMLCanvasElement>({
     width: gameWidth,
     height: gameHeight,
 });
+app.renderer.resize(gameWidth, gameHeight);
 
 window.onload = async (): Promise<void> => {
 	let fpsMeter = document.createElement("div");
 	fpsMeter.classList.add("fps-meter")
-	document.body.appendChild(fpsMeter);
-
     await loadGameAssets();
-
+	
     document.body.appendChild(app.view);
+	document.body.appendChild(fpsMeter);
 
     resizeCanvas();
 
@@ -93,11 +93,15 @@ async function loadGameAssets(): Promise<void> {
 function resizeCanvas(): void {
 	const canvas = app.view;
 	let scaleX, scaleY, scale, center;
-	scaleX = window.innerWidth / canvas.offsetWidth;
-	scaleY = window.innerHeight / canvas.offsetHeight;
+
+	scaleX = window.innerWidth / gameWidth;
+	scaleY = window.innerHeight / gameHeight;
 	scale = Math.min(scaleX, scaleY);
+	if(scale < 1) {
+		scale = 1;
+	}
 	canvas.style.transformOrigin = "0 0";
-	canvas.style.transform = "scale(" + scale + ")";
+	canvas.style.transform = "scale(" + scale + ") translate(0, 0)";
 
 	if(canvas.offsetWidth > canvas.offsetHeight) {
 		center = canvas.offsetWidth * scale < window.innerWidth ? "horizontally" : "vertically";
@@ -108,22 +112,12 @@ function resizeCanvas(): void {
 	let margin;
 	if (center === "horizontally") {
 		margin = (window.innerWidth - canvas.offsetWidth * scale) / 2;
-		canvas.style .marginTop = 0 + "px";
-		canvas.style .marginBottom = 0 + "px";
-		canvas.style .marginLeft = margin + "px";
-		canvas.style .marginRight = margin + "px";
+		canvas.style.margin = `0px ${margin}px`;
 	};
 	if (center === "vertically") {
 		margin = (window.innerHeight - canvas.offsetHeight * scale) / 2;
-		canvas.style .marginTop  = margin + "px";
-		canvas.style .marginBottom = margin + "px";
-		canvas.style .marginLeft = 0 + "px";
-		canvas.style .marginRight  = 0 + "px";
+		canvas.style.margin = `${margin}px 0px`;
 	};
-
-	canvas.style.paddingLeft = 0 + "px";canvas.style.paddingRight  = 0 + "px";
-	canvas.style.paddingTop  = 0 + "px";canvas.style.paddingBottom = 0 + "px";
-	canvas.style.display = "-webkit-inline-box";
 }
 
 window.addEventListener("resize", resizeCanvas);

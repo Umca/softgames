@@ -38,21 +38,21 @@ export class Scene {
 		let minScale = 0.88;
 		this.magicWordButton.scale.set(minScale);
 
-		this.magicWordButton.on("click", () => {
+		this.magicWordButton.on("pointerup", () => {
 			if(this.state?.getName() != "MagicWords") {
 				this.resetButtons();
 				this.magicWordButton.scale.set(minScale);
 				this.setState(this.states.MagicWord);
 			}
 		});
-		this.aceButton.on("click", () => {
+		this.aceButton.on("pointerup", () => {
 			if(this.state?.getName() != "AceOFShadows") {
 				this.resetButtons();
 				this.aceButton.scale.set(minScale);
 				this.setState(this.states.AceShadows);
 			}
 		});
-		this.flameButton.on("click", () => {
+		this.flameButton.on("pointerup", () => {
 			if(this.state?.getName() != "PhoenixFlame") {
 				this.resetButtons();
 				this.flameButton.scale.set(minScale);
