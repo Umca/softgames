@@ -1,0 +1,12 @@
+body {
+    overflow: hidden;
+    margin: 0 auto;
+    background-color: black;
+}
+
+.fps-meter {
+	color: white;
+	font-size: 30px;
+	margin: 10px;
+	position: absolute;
+}
