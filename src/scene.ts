@@ -46,7 +46,7 @@ export class Scene {
 			}
 		});
 		this.aceButton.on("pointerup", () => {
-			if(this.state?.getName() != "AceOFShadows") {
+			if(this.state?.getName() != "AceOfShadows") {
 				this.resetButtons();
 				this.aceButton.scale.set(minScale);
 				this.setState(this.states.AceShadows);

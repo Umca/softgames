@@ -20,7 +20,7 @@ export class AceOfShadows extends Base {
 	constructor(stage: Container, pos: {x: number, y: number}, amount: number, delay: number) {
 		super(stage, pos);
 
-		this.name = "AceOFShadows";
+		this.name = "AceOfShadows";
 		
 		this.delay = delay;
 		this.cardAmount = amount;
